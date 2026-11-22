@@ -1,0 +1,25 @@
+.page { min-height: 100vh; display: grid; place-items: center; padding: 1rem;
+  background: linear-gradient(135deg, #e8f4ff, #f5fbff); font-family: system-ui, sans-serif; }
+.card { width: 100%; max-width: 440px; background: #fff; border-radius: 16px;
+  padding: 2rem; box-shadow: 0 10px 30px rgba(30, 100, 170, .12); }
+h1 { margin: 0 0 .5rem; font-size: 1.4rem; color: #1d5a99; text-align: center; }
+h2 { margin: .5rem 0 1rem; font-size: 1.1rem; color: #2b6cb0; }
+.subtitle { text-align: center; color: #555; }
+.roles { display: grid; gap: .75rem; margin-top: 1rem; }
+.role { display: flex; align-items: center; gap: .75rem; padding: 1rem; font-size: 1rem;
+  border: 2px solid #cfe5fb; background: #f4faff; border-radius: 12px; cursor: pointer; transition: .15s; }
+.role:hover { border-color: #4a9be8; background: #e6f2ff; }
+.icon { font-size: 1.5rem; }
+.tabs { display: flex; gap: .5rem; margin-bottom: 1rem; }
+.tabs button { flex: 1; padding: .6rem; border: none; border-radius: 8px; background: #eef5fc; cursor: pointer; }
+.tabs button.active { background: #4a9be8; color: #fff; }
+form { display: flex; flex-direction: column; gap: .3rem; }
+label { display: flex; flex-direction: column; gap: .25rem; margin-top: .4rem; font-size: .9rem; color: #333; }
+input, select { padding: .6rem .7rem; border: 1px solid #c5d9ee; border-radius: 8px; font-size: 1rem; }
+input:focus, select:focus { outline: 2px solid #9fcbf5; }
+.error { color: #c53030; }
+.ok { color: #2f855a; text-align: center; }
+.primary { margin-top: 1rem; padding: .75rem; border: none; border-radius: 10px;
+  background: #4a9be8; color: #fff; font-size: 1rem; cursor: pointer; }
+.primary:hover { background: #3787d6; }
+.link { background: none; border: none; padding: 0; color: #2b6cb0; cursor: pointer; text-align: left; }

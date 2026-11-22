@@ -1,0 +1,81 @@
+<main class="page">
+  <section class="card">
+    <h1>🏥 Gestion des rendez-vous</h1>
+
+    @if (!role) {
+      <p class="subtitle">Vous êtes :</p>
+      <div class="roles">
+        @for (r of roles; track r.value) {
+          <button type="button" class="role" (click)="chooseRole(r.value)">
+            <span class="icon">{{ r.icon }}</span> {{ r.label }}
+          </button>
+        }
+      </div>
+    } @else {
+      <button type="button" class="link" (click)="changeRole()">← Changer de profil</button>
+      <h2>Espace {{ roleLabel }}</h2>
+
+      @if (role !== 'admin') {
+  <div class="tabs">
+    <button type="button" [class.active]="mode === 'login'" (click)="setMode('login')">Connexion</button>
+    <button type="button" [class.active]="mode === 'register'" (click)="setMode('register')">Créer un compte</button>
+  </div>
+} @else {
+  <p class="info">
+    Les comptes administrateur sont créés par le responsable du système.
+    Connectez-vous avec vos identifiants.
+  </p>
+}
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <label>CIN
+          <input formControlName="cin" inputmode="numeric" maxlength="8" placeholder="8 chiffres" />
+        </label>
+        @if (invalid('cin')) { <small class="error">Le CIN doit contenir exactement 8 chiffres.</small> }
+
+        @if (mode === 'register') {
+          <label>Nom <input formControlName="nom" /></label>
+          @if (invalid('nom')) { <small class="error">Nom obligatoire.</small> }
+
+          <label>Prénom <input formControlName="prenom" /></label>
+          @if (invalid('prenom')) { <small class="error">Prénom obligatoire.</small> }
+
+          @if (role === 'medecin') {
+            <label>Spécialité
+              <select formControlName="specialite">
+                <option value="" disabled>Choisir…</option>
+                @for (s of specialites; track s) { <option [value]="s">{{ s }}</option> }
+              </select>
+            </label>
+            @if (invalid('specialite')) { <small class="error">Spécialité obligatoire.</small> }
+          }
+
+          <label>E-mail <input type="email" formControlName="email" /></label>
+          @if (invalid('email')) { <small class="error">E-mail invalide.</small> }
+        }
+
+        <label>Mot de passe <input type="password" formControlName="motDePasse" /></label>
+        @if (invalid('motDePasse')) {
+          <small class="error">
+            {{ mode === 'register'
+                ? '8 caractères minimum, avec majuscule, minuscule et chiffre.'
+                : 'Mot de passe obligatoire.' }}
+          </small>
+        }
+
+        @if (mode === 'register') {
+          <label>Confirmer le mot de passe
+            <input type="password" formControlName="confirmation" />
+          </label>
+          @if (form.hasError('different') && form.controls.confirmation.touched) {
+            <small class="error">Les mots de passe ne sont pas identiques.</small>
+          }
+        }
+
+        <button type="submit" class="primary">
+          {{ mode === 'login' ? 'Se connecter' : 'Créer mon compte' }}
+        </button>
+        @if (message) { <p class="ok">{{ message }}</p> }
+      </form>
+    }
+  </section>
+</main>
